@@ -1,0 +1,18 @@
+POST http://127.0.0.1:8000/apiBloodlink/doctors/
+content-type: application/json
+
+{
+  "name": "Dr. Jean Nkomo"
+}
+###
+GET  http://127.0.0.1:8000/apiBloodlink/doctors/
+###
+DELETE  http://127.0.0.1:8000/apiBloodlink/doctors/<id>
+###
+PUT http://127.0.0.1:8000/apiBloodlink/doctors/<id>
+Content-Type: application/json
+
+{
+    'name': ""
+}
+
