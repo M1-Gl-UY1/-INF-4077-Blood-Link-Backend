@@ -13,7 +13,7 @@ class Provider(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False  )
     name = models.CharField(max_length=50)
-    sexe = models.BooleanField(choices=SEX_CHOICES, default='M')
+    sexe = models.CharField(choices=SEX_CHOICES, default='M')
     date_birth = models.DateField(null=True, blank=True)
     email = models.EmailField(max_length=127, unique=True)
     phone_number = models.CharField(max_length=15, unique=True)

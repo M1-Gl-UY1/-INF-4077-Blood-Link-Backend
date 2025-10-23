@@ -16,12 +16,27 @@ class Alert(models.Model):
         ('CANCELLED', 'Annulée'),
         ('FAILED', 'Échouée'),
     ]
+    
+    RHESUS_CHOICES = [
+        ('POS', '+'),
+        ('NEG', '-'),
+    ]
 
+    BLOOD_GROUP_CHOICES = [
+        ('A', 'A'),
+        ('B', 'B'),
+        ('AB', 'AB'),
+        ('O', 'O'),
+    ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    creates_date = models.DateField()
-    Resolved_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
-    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name = 'emit')
+    created_date = models.DateField()
+    Resolved_date = models.DateField()
+    blood_groupe = models.CharField(choices=BLOOD_GROUP_CHOICES)
+    rhesus = models.CharField(choices=RHESUS_CHOICES)
+    
+    # liaison avec la banque qui emmet une alerte
+    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name = 'emitted_alerts')
     
     
 

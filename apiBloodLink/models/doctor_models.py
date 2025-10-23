@@ -27,9 +27,9 @@ class Doctor(models.Model):
     name = models.CharField(max_length=100)
     grade = models.CharField(max_length=4, choices=GRADE_CHOICES, default='INT')
     speciality = models.CharField(max_length=2, choices=SPECIALITY_CHOICES, default='GP')
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15, unique=True)
     password = models.CharField(max_length=255)
+    
+    blood_bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='linked')
 
     def save(self, *args, **kwargs):
         # Hachage automatique du mot de passe avant enregistrement
@@ -38,7 +38,7 @@ class Doctor(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Dr. {self.name} ({self.get_grade_display()} - {self.get_speciality_display()})"
+        return f"Dr. {self.name} ({self.grade} - {self.speciality})"
 
 
 """ Requete envoye par le Docteur  a une banque"""
@@ -51,12 +51,25 @@ class BloodRequest(models.Model):
         ('rejected', 'Rejetée'),
         
     ]
+    RHESUS_CHOICES = [
+        ('POS', '+'),
+        ('NEG', '-'),
+    ]
 
-    docteur = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='blood_requests')
+    BLOOD_GROUP_CHOICES = [
+        ('A', 'A'),
+        ('B', 'B'),
+        ('AB', 'AB'),
+        ('O', 'O'),
+    ]
     date_request =  models.DateTimeField(auto_now_add=True)
-    blood_group = models.CharField(max_length=1)
-    rhesus = models.CharField(max_length=1)
+    
+    docteur = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='blood_requests')
+    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='blood_requests')
+    
+    blood_group = models.CharField(choices=BLOOD_GROUP_CHOICES)
+    rhesus = models.CharField(choices=RHESUS_CHOICES)
+    
     quantity = models.PositiveIntegerField()
     status = models.CharField(max_length=8, choices=BloodRequest_status, default='pending')
     

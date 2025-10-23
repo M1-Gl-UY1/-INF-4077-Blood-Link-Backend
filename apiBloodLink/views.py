@@ -36,7 +36,7 @@ class BloodBankListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = BloodBankSerializer
 
 class BloodBankRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BloodBank.object.all()
+    queryset = BloodBank.objects.all()
     serializer_class = BloodBankSerializer
     lookup_field = "id"
 
@@ -52,43 +52,43 @@ class BloodTransactionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestro
 # views for blood-bag
 
 class BloodBagListCreateAPIView(generics.ListCreateAPIView):
-    request = BloodBag.object.all()
+    request = BloodBag.objects.all()
     serializer_class = BloodBagSerializer
     
 class BloodBagRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    request = BloodBag.object.all()
+    request = BloodBag.objects.all()
     serializer_class = BloodBagSerializer
     lookup_field = "id"
     
 # views for alert
 class AlertListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Alert.object.all()
+    queryset = Alert.objects.all()
     serializer_class = AlertSerializer
 
 class AlertRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Alert.object.all()
+    queryset = Alert.objects.all()
     serializer_class = AlertSerializer
     lookup_field = "id"
 
 
 # views for Provider
 class ProviderListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Provider.object.all()
+    queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
 class ProviderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Provider.object.all()
+    queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
     lookup_field = "id"
 
 # views for Receive-
 
 class AlerteReceiveListAPIView(generics.ListAPIView):
-    queryset = AlerteReceive.object.all()
+    queryset = AlerteReceive.objects.all()
     serializer_class = AlertReceiveSerializers
 
 class AlerteReceiveRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = AlerteReceive.object.all()
+    queryset = AlerteReceive.objects.all()
     serializer_class = AlertReceiveSerializers
     lookup_field = "id"
     
