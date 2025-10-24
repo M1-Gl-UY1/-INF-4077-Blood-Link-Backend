@@ -24,9 +24,9 @@ class BloodRequestSerializer(serializers.ModelSerializer):
 
 class DoctorSerializer(serializers.ModelSerializer):
     blood_requests = BloodRequestSerializer(source='bloodrequest_set', many=True, read_only=True)
-
+    bank_id = serializers.CharField(source='blood_bank.id', read_only=True )
     class Meta:
         model = Doctor
-        fields = ['id', 'name', 'blood_requests']
+        fields = '__all__'
         read_only_fields = ["id"]
         

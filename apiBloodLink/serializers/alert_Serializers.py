@@ -8,7 +8,7 @@ class AlertSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Alert
-        fields = ['id', 'date', 'provider', 'provider_name', 'bank', 'bank_name']
+        fields = '__all__'
         read_only_fields = ["id","date"]
         # 'provider' et 'bank' gardent les IDs pour les relations
         # 'provider_name' et 'bank_name' affichent les noms lisibles

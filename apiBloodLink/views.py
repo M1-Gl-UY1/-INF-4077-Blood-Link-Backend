@@ -52,11 +52,11 @@ class BloodTransactionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestro
 # views for blood-bag
 
 class BloodBagListCreateAPIView(generics.ListCreateAPIView):
-    request = BloodBag.objects.all()
+    queryset = BloodBag.objects.all()
     serializer_class = BloodBagSerializer
     
 class BloodBagRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    request = BloodBag.objects.all()
+    queryset = BloodBag.objects.all()
     serializer_class = BloodBagSerializer
     lookup_field = "id"
     
@@ -83,7 +83,7 @@ class ProviderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView
 
 # views for Receive-
 
-class AlerteReceiveListAPIView(generics.ListAPIView):
+class AlerteReceiveListCreateAPIView(generics.ListCreateAPIView):
     queryset = AlerteReceive.objects.all()
     serializer_class = AlertReceiveSerializers
 
@@ -91,5 +91,11 @@ class AlerteReceiveRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
     queryset = AlerteReceive.objects.all()
     serializer_class = AlertReceiveSerializers
     lookup_field = "id"
+    
+    
+# views for bloodback
+
+class BloodBagSerializerListCreateAPIView(generics.ListCreateAPIView):
+    queryset = BloodBag.objects.all()
     
     

@@ -24,6 +24,9 @@ urlpatterns = [
     path('providers/<uuid:id>/', views.ProviderRetrieveUpdateDestroyAPIView.as_view() ),
     
         #End point for provider
-    path('receiveAlertes/', views.AlerteReceiveListAPIView.as_view() ),
+    path('receiveAlertes/', views.AlerteReceiveListCreateAPIView.as_view() ),
     path('receiveAlertes/<uuid:id>/', views.AlerteReceiveRetrieveUpdateDestroyAPIView.as_view() ),
+
+    path('blood_bags/', views.BloodBagListCreateAPIView.as_view(), name='bloodbag-list'),
+    path('blood_bags/<uuid:id>/', views.BloodBagRetrieveUpdateDestroyAPIView.as_view(), name='bloodbag-detail'),
 ]
