@@ -5,6 +5,8 @@ from . import views
 # ve service
 from .servicesViews.ValidateBloodRequestAPIView import ValidateBloodRequestAPIView
 from .servicesViews.reply_views import ReplyCreateAPIView
+
+from .servicesViews.initBloodTransactionViews import ValidateinitBloodTransactionViewsView
 # api doctor
 urlpatterns = [
     # End point for doctor
@@ -16,7 +18,12 @@ urlpatterns = [
     path('bloodBanks/<uuid:id>/', views.BloodBankRetrieveUpdateDestroyAPIView.as_view() ),
     
     # End Point for     path('bloodTransactions/', views.BloodTransactionListCreateAPIView.as_view() ),
-    path('bloodTransactions/', views.BloodTransactionListCreateAPIView.as_view() ),
+    #utiliser ce Endpoint pour get juste pas pour creeer
+    path('getbloodTransactions/', views.BloodTransactionListCreateAPIView.as_view() ),
+    #utiliser ce Endpoint pour post juste pas pour creeer
+    path('postbloodTransactions/', ValidateinitBloodTransactionViewsView.as_view() ),
+    
+    
     path('bloodTransactions/<uuid:id>/', views.BloodTransactionRetrieveUpdateDestroyAPIView.as_view() ),
     
     #End point for Alert

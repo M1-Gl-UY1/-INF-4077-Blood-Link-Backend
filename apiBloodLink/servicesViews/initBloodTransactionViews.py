@@ -6,12 +6,12 @@ from apiBloodLink.service.initBloodTransactionService import TransactionCreateVi
 from apiBloodLink.serializers.blood_bank_serializers import BloodTransactionSerializer
 
 
-class ValidateBloodRequestAPIView(APIView):
-    def post(self, request, request_id):
+class ValidateinitBloodTransactionViewsView(APIView):
+    def post(self, request):
         provider_id = request.data.get("provider_id")
         bank_id = request.data.get("bank_id")
         
-        bloodTransaction = TransactionCreateView(provider_id,bank_id)
+        bloodTransaction = TransactionCreateView(provider_id, bank_id)
 
         if bloodTransaction:
             serializer = BloodTransactionSerializer(bloodTransaction)

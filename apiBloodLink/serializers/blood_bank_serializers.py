@@ -5,11 +5,10 @@ from apiBloodLink.models import BloodBank, BloodTransaction
 class BloodTransactionSerializer(serializers.ModelSerializer):
     provider_name = serializers.CharField(source='provider.name', read_only=True)
     bank_name = serializers.CharField(source='bank.name', read_only=True)
-    blood_bag_name = serializers.CharField(source='blood_bag.name', read_only=True)  # ou un champ qui identifie la poche
 
     class Meta:
         model = BloodTransaction
-        fields = ['id', 'provider', 'provider_name', 'bank', 'bank_name', 'blood_bag', 'blood_bag_name', 'transaction_type', 'date']
+        fields = '__all__'
         read_only_fields = ["id", "date"]
         
 

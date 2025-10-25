@@ -9,10 +9,10 @@ from ..models.provider_models import Provider
 
 
 @transaction.atomic
-def TransactionCreateView(provider_id, bloodBank_id):
+def TransactionCreateView(provider_id, bank_id):
     try:
         provider = Provider.objects.get(id=provider_id)
-        bank = BloodBank.objects.get(id=bloodBank_id)
+        bank = BloodBank.objects.get(id=bank_id)
     
         providerInstance  = Provider.objects.get(id=provider_id)
         bloodbag = BloodBag.objects.create(
@@ -22,8 +22,8 @@ def TransactionCreateView(provider_id, bloodBank_id):
         )
     
         transaction = BloodTransaction.objects.create(
-            provider_id=provider,
-            bank_id=bank,
+            provider_id=provider_id,
+            bank_id=bank_id,
             blood_bag=bloodbag
         )
         return transaction
