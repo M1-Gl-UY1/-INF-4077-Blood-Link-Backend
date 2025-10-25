@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models.doctor_models import Doctor
-from .serializers.doctor_serializers import DoctorSerializer
+from .models.doctor_models import *
+from .serializers.doctor_serializers import *
 
 from .models.blood_bank_models import *
 from .serializers.blood_bank_serializers import *
@@ -93,9 +93,23 @@ class AlerteReceiveRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
     lookup_field = "id"
     
     
-# views for bloodback
+# views for bloodbag
 
-class BloodBagSerializerListCreateAPIView(generics.ListCreateAPIView):
-    queryset = BloodBag.objects.all()
+# class BloodBagListCreateAPIView(generics.ListCreateAPIView):
+#     queryset = BloodBag.objects.all()
+#     serializer_class = BloodBagSerializer
     
+# class BloodBagRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = BloodBag.objects.all()
+#     serializer_class = BloodBagSerializer
+#     lookup_field = "id"
+
+
+class BloodRequestListCreateAPIView(generics.ListCreateAPIView):
+    queryset = BloodRequest.objects.all()
+    serializer_class = BloodRequestSerializer
     
+class BloodRequestRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BloodRequest.objects.all()
+    serializer_class = BloodRequestSerializer
+    lookup_field = "id"

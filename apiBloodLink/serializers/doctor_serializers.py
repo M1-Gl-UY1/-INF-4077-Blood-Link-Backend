@@ -19,7 +19,7 @@ class BloodRequestSerializer(serializers.ModelSerializer):
             'quantity',
             'status'
         ]
-        read_only_fields = ["id"]
+        read_only_fields = ["id", "date_request"]
 
 
 class DoctorSerializer(serializers.ModelSerializer):

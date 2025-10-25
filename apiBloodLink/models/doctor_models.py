@@ -62,10 +62,11 @@ class BloodRequest(models.Model):
         ('AB', 'AB'),
         ('O', 'O'),
     ]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     date_request =  models.DateTimeField(auto_now_add=True)
     
     docteur = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='blood_requests')
-    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='blood_requests')
+    bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='blood_requests', null=True, blank=True)
     
     blood_group = models.CharField(choices=BLOOD_GROUP_CHOICES)
     rhesus = models.CharField(choices=RHESUS_CHOICES)

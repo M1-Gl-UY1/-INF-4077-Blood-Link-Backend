@@ -30,8 +30,8 @@ class Alert(models.Model):
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
-    created_date = models.DateField()
-    Resolved_date = models.DateField()
+    created_date = models.DateField(auto_now_add=True)
+    Resolved_date = models.DateField(null=True, blank=True)
     blood_groupe = models.CharField(choices=BLOOD_GROUP_CHOICES)
     rhesus = models.CharField(choices=RHESUS_CHOICES)
     

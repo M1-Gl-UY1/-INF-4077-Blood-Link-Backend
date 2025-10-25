@@ -6,7 +6,7 @@ content-type: application/json
   "grade": "SPC",
   "speciality": "CD",
   "password": "motdepasse123",
-  "blood_bank": "eeeef11c-e628-4643-b175-ce4d69787407"
+  "blood_bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1"
 }
 
 ###
@@ -26,10 +26,10 @@ POST http://127.0.0.1:8000/apiBloodlink/bloodBanks/
 Content-Type: application/json
 
 {
-  "name": "Central Blood Bank",
-  "email": "centralbank@example.com",
+  "name": "REGIONAL Blood Bank",
+  "email": "regionalbank@example.com",
   "password": "StrongPass123!",
-  "location": "Yaoundé - Centre Hospitalier"
+  "location": "DOUALA - Centre Hospitalier"
 }
 ###
 GET http://127.0.0.1:8000/apiBloodlink/bloodBanks/
@@ -40,10 +40,10 @@ PUT http://127.0.0.1:8000/apiBloodlink/bloodbanks/<id>
 Content-Type: application/json
 
 {
-  "name": "Central Blood Bank",
+  "name": "REGIONAL Blood Bank",
   "email": "centralbank@example.com",
   "password": "StrongPass123!",
-  "location": "Yaoundé - Centre Hospitalier"
+  "location": "DOUALA - Centre Hospitalier"
 }
 
 ###
@@ -58,12 +58,22 @@ Content-Type: application/json
 
 {
   "status": "PENDING",
-  "created_date": "2025-10-23",
-  "Resolved_date": "2025-10-25",
-  "blood_groupe": "O",
+  "Resolved_date": null,
+  "blood_groupe": "A",
   "rhesus": "POS",
-  "bank": "eeeef11c-e628-4643-b175-ce4d69787407"
+  "bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1"
 }
+
+
+  # "bank": eeeef11c-e628-4643-b175-ce4d69787407
+###
+POST http://127.0.0.1:8000/apiBloodlink/alerts/45abf61f-44bd-4e98-a73a-ffaa7e0dbe03/reply/
+Content-Type: application/json
+
+{
+  "provider_id": "7a4e6d8f-eaeb-4251-b7ad-a33eac478900",
+}
+###
 
 ###
 # List all alerts
@@ -87,7 +97,37 @@ Content-Type: application/json
 }
 ###
 # Partial update of an alert (patch)
-PATCH http://127.0.0.1:8000/apiBloodlink/alerts/<id>
+# BLOOD_REQUESTS endpoints
+
+# Créer un blood_request
+POST http://127.0.0.1:8000/apiBloodlink/bloodRequests/
+Content-Type: application/json
+
+{
+  "docteur": "c1c7eab5-f4fe-4d16-b260-4feaacc23031",
+  "bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1",
+  "blood_group": "O",
+  "rhesus": "POS",
+  "quantity": 5,
+  "status": "pending"
+}
+###
+GET http://127.0.0.1:8000/apiBloodlink/bloodRequests/
+
+# validation d'une request:
+###
+POST http://127.0.0.1:8000/apiBloodlink/requests/89765044-c547-46af-a739-bd1e71a7eeff/validate/
+Content-Type: application/json
+
+{
+  
+}
+
+###
+# Lister tous les blood_requests
+GET http://127.0.0.1:8000/apiBloodlink/bloodRequests/
+###
+
 Content-Type: application/json
 
 {
@@ -316,3 +356,6 @@ GET http://127.0.0.1:8000/apiBloodlink/alert_receivers/?channel=sms
 # Filtrer transactions par période
 GET http://127.0.0.1:8000/apiBloodlink/blood_transactions/?start_date=2025-10-01&end_date=2025-10-31
 ###
+
+
+# test API SERVICE.

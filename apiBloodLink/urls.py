@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+
+# ve service
+from .servicesViews.ValidateBloodRequestAPIView import ValidateBloodRequestAPIView
+from .servicesViews.reply_views import ReplyCreateAPIView
 # api doctor
 urlpatterns = [
     # End point for doctor
@@ -29,4 +33,10 @@ urlpatterns = [
 
     path('blood_bags/', views.BloodBagListCreateAPIView.as_view(), name='bloodbag-list'),
     path('blood_bags/<uuid:id>/', views.BloodBagRetrieveUpdateDestroyAPIView.as_view(), name='bloodbag-detail'),
+
+    path('bloodRequests/', views.BloodRequestListCreateAPIView.as_view(), name='bloodrequest-list'),
+    path('bloodRequests/<uuid:id>/', views.BloodRequestRetrieveUpdateDestroyAPIView.as_view(), name='bloodrequest-detail'),
+    
+    path('requests/<uuid:request_id>/validate/', ValidateBloodRequestAPIView.as_view(), name='validate-blood-request'),
+    path('alerts/<uuid:alert_id>/reply/', ReplyCreateAPIView.as_view(), name='reply-alert'),
 ]
