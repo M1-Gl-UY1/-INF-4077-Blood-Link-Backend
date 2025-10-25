@@ -23,7 +23,7 @@ class BloodBag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     blood_group = models.CharField(choices=BLOOD_GROUP_CHOICES)
     rhesus = models.CharField(choices=RHESUS_CHOICES)
-    provider =models.ForeignKey(Provider, on_delete=models.CASCADE, related_name="belong_to")
+    provider = models.ForeignKey(Provider, on_delete=models.CASCADE, related_name="belong_to")
     
     def __str__(self):
         return f"Poche {self.blood_group}{self.rhesus}"

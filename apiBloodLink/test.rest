@@ -67,11 +67,11 @@ Content-Type: application/json
 
   # "bank": eeeef11c-e628-4643-b175-ce4d69787407
 ###
-POST http://127.0.0.1:8000/apiBloodlink/alerts/45abf61f-44bd-4e98-a73a-ffaa7e0dbe03/reply/
+POST http://127.0.0.1:8000/apiBloodlink/alerts/6710273a-b453-4922-8ea9-24d69ef294e4/reply/
 Content-Type: application/json
 
 {
-  "provider_id": "7a4e6d8f-eaeb-4251-b7ad-a33eac478900",
+  "provider_id": "f9be6bc8-f0f9-4ab0-9e41-754b2358cbbc"
 }
 ###
 
@@ -105,7 +105,7 @@ Content-Type: application/json
 
 {
   "docteur": "c1c7eab5-f4fe-4d16-b260-4feaacc23031",
-  "bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1",
+  "bank": "eeeef11c-e628-4643-b175-ce4d69787407",
   "blood_group": "O",
   "rhesus": "POS",
   "quantity": 5,
@@ -116,7 +116,7 @@ GET http://127.0.0.1:8000/apiBloodlink/bloodRequests/
 
 # validation d'une request:
 ###
-POST http://127.0.0.1:8000/apiBloodlink/requests/89765044-c547-46af-a739-bd1e71a7eeff/validate/
+POST http://127.0.0.1:8000/apiBloodlink/requests/eeeef11c-e628-4643-b175-ce4d69787407/validate/
 Content-Type: application/json
 
 {

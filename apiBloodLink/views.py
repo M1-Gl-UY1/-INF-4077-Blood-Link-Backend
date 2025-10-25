@@ -41,11 +41,11 @@ class BloodBankRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVie
     lookup_field = "id"
 
 class BloodTransactionListCreateAPIView(generics.ListCreateAPIView):
-    ueryset = BloodTransaction.objects.all()
+    queryset = BloodTransaction.objects.all()
     serializer_class = BloodTransactionSerializer
 
 class BloodTransactionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    ueryset = BloodTransaction.objects.all()
+    queryset = BloodTransaction.objects.all()
     serializer_class = BloodTransactionSerializer
     lookup_field = "id"
     
