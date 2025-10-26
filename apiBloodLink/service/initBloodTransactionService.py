@@ -30,4 +30,4 @@ def TransactionCreateView(provider_id, bank_id):
     
     except (Provider.DoesNotExist, BloodBank.DoesNotExist):
         return None
-    
+     
