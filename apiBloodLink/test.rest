@@ -1,0 +1,351 @@
+#################################################################
+#                         DOCTORS                                #
+#################################################################
+
+### Create a doctor
+POST http://127.0.0.1:8000/apiBloodlink/doctors/
+Content-Type: application/json
+
+{
+  "name": "Dr. Pierre Mbarga",
+  "grade": "SPC",
+  "speciality": "CD",
+  "password": "motdepasse123",
+  "blood_bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1"
+}
+
+### Get all doctors
+GET http://127.0.0.1:8000/apiBloodlink/doctors/
+
+### Delete a doctor by ID
+DELETE http://127.0.0.1:8000/apiBloodlink/doctors/<id>
+
+### Update a doctor by ID
+PUT http://127.0.0.1:8000/apiBloodlink/doctors/<id>
+Content-Type: application/json
+
+{
+  "name": "Dr. Updated Name"
+}
+
+
+#################################################################
+#                        BLOOD BANKS                             #
+#################################################################
+
+### Create a blood bank
+POST http://127.0.0.1:8000/apiBloodlink/bloodBanks/
+Content-Type: application/json
+
+{
+  "name": "REGIONAL Blood Bank Bafoussam",
+  "email": "bafoussam@example.com",
+  "password": "StrongPass123!",
+  "location": "Bafoussam - Centre Hospitalier"
+}
+
+### Get all blood banks
+GET http://127.0.0.1:8000/apiBloodlink/bloodBanks/
+
+### Get a blood bank by ID
+GET http://127.0.0.1:8000/apiBloodlink/bloodbanks/<id>
+
+### Update a blood bank by ID
+PUT http://127.0.0.1:8000/apiBloodlink/bloodbanks/<id>
+Content-Type: application/json
+
+{
+  "name": "REGIONAL Blood Bank Bafoussam",
+  "email": "bafoussam@example.com",
+  "password": "StrongPass123!",
+  "location": "Bafoussam - Centre Hospitalier"
+}
+
+### Delete a blood bank by ID
+DELETE http://127.0.0.1:8000/apiBloodlink/bloodbanks/<id>
+
+
+#################################################################
+#                          ALERTS                                #
+#################################################################
+
+### Create an alert
+POST http://127.0.0.1:8000/apiBloodlink/alerts/
+Content-Type: application/json
+
+{
+  "status": "PENDING",
+  "Resolved_date": null,
+  "blood_groupe": "A",
+  "rhesus": "POS",
+  "bank": "ce60c377-9e2a-4d1e-8686-82e31c0c03d1"
+}
+
+### Reply to an alert
+POST http://127.0.0.1:8000/apiBloodlink/alerts/6710273a-b453-4922-8ea9-24d69ef294e4/reply/
+Content-Type: application/json
+
+{
+  "provider_id": "f9be6bc8-f0f9-4ab0-9e41-754b2358cbbc"
+}
+
+### List all alerts
+GET http://127.0.0.1:8000/apiBloodlink/alerts/
+
+### Get alert by ID
+GET http://127.0.0.1:8000/apiBloodlink/alerts/<id>
+
+### Update an alert
+PUT http://127.0.0.1:8000/apiBloodlink/alerts/<id>
+Content-Type: application/json
+
+{
+  "title": "Urgent: besoin de sang O+",
+  "description": "Patient stabilisé mais toujours besoin de transfusion",
+  "blood_type": "O+",
+  "units_needed": 2,
+  "location": "Yaoundé - Hôpital Central",
+  "severity": "medium",
+  "reported_by": 1
+}
+
+### Delete an alert
+DELETE http://127.0.0.1:8000/apiBloodlink/alerts/<id>
+
+### Filter alerts by blood type
+GET http://127.0.0.1:8000/apiBloodlink/alerts/?blood_type=O%2B
+
+### Filter alerts by location
+GET http://127.0.0.1:8000/apiBloodlink/alerts/?location=Yaound%C3%A9
+
+
+#################################################################
+#                     BLOOD REQUESTS                            #
+#################################################################
+
+### Create a blood request
+POST http://127.0.0.1:8000/apiBloodlink/bloodRequests/
+Content-Type: application/json
+
+{
+  "docteur": "c1c7eab5-f4fe-4d16-b260-4feaacc23031",
+  "bank": "eeeef11c-e628-4643-b175-ce4d69787407",
+  "blood_group": "O",
+  "rhesus": "POS",
+  "quantity": 5,
+  "status": "pending"
+}
+
+### List all blood requests
+GET http://127.0.0.1:8000/apiBloodlink/bloodRequests/
+
+### Validate a blood request
+POST http://127.0.0.1:8000/apiBloodlink/requests/eeeef11c-e628-4643-b175-ce4d69787407/validate/
+Content-Type: application/json
+
+{}
+
+
+#################################################################
+#                        PROVIDERS                               #
+#################################################################
+
+### Create a provider
+POST http://127.0.0.1:8000/apiBloodlink/providers/
+Content-Type: application/json
+
+{
+  "name": "Idriss Dupont",
+  "sexe": "M",
+  "date_birth": "1995-06-12",
+  "email": "joel.dupont@example.com",
+  "phone_number": "+237654789322",
+  "blood_group": "O",
+  "rhesus": "+",
+  "last_give": "2025-03-01",
+  "password": "monMotDePasse123",
+  "historique_medical": null
+}
+
+### Get all providers
+GET http://127.0.0.1:8000/apiBloodlink/providers/
+
+### Get provider by ID
+GET http://127.0.0.1:8000/apiBloodlink/providers/<id>
+
+### Update provider (PUT)
+PUT http://127.0.0.1:8000/apiBloodlink/providers/<id>
+Content-Type: application/json
+
+{
+  "name": "Centre médical Nord - MAJ",
+  "contact_email": "newemail@centrenord.example",
+  "phone": "+237699111111",
+  "address": "Nouvelle adresse, Yaoundé"
+}
+
+### Partial update (PATCH)
+PATCH http://127.0.0.1:8000/apiBloodlink/providers/<id>
+Content-Type: application/json
+
+{
+  "phone": "+237699222222"
+}
+
+### Delete provider
+DELETE http://127.0.0.1:8000/apiBloodlink/providers/<id>
+
+
+#################################################################
+#                       BLOOD BAGS                               #
+#################################################################
+
+### Create a blood bag
+POST http://127.0.0.1:8000/apiBloodlink/blood_bags/
+Content-Type: application/json
+
+{
+  "blood_group": "A",
+  "rhesus": "POS",
+  "provider": "7a4e6d8f-eaeb-4251-b7ad-a33eac478900"
+}
+
+### Get all blood bags
+GET http://127.0.0.1:8000/apiBloodlink/blood_bags/
+
+### Get blood bag by ID
+GET http://127.0.0.1:8000/apiBloodlink/blood_bags/<id>
+
+### Update blood bag (PUT)
+PUT http://127.0.0.1:8000/apiBloodlink/blood_bags/<id>
+Content-Type: application/json
+
+{
+  "bag_id": "BB-2025-0001",
+  "blood_group": "O",
+  "rhesus": "POS",
+  "donation_date": "2025-10-20",
+  "expiry_date": "2025-11-20",
+  "status": "reserved",
+  "bank": "eeeef11c-e628-4643-b175-ce4d69787407",
+  "collected_by": "8a7f7f2c-1111-4444-8888-abcdef123456"
+}
+
+### Partial update (PATCH)
+PATCH http://127.0.0.1:8000/apiBloodlink/blood_bags/<id>
+Content-Type: application/json
+
+{
+  "status": "used",
+  "expiry_date": "2025-11-01"
+}
+
+### Delete blood bag
+DELETE http://127.0.0.1:8000/apiBloodlink/blood_bags/<id>
+
+
+#################################################################
+#                  ALERT RECEIVERS                              #
+#################################################################
+
+### Create an alert receiver
+POST http://127.0.0.1:8000/apiBloodlink/receiveAlertes/
+Content-Type: application/json
+
+{
+  "date": "2025-10-24T16:30:00Z",
+  "status": "PENDING",
+  "provider": "7a4e6d8f-eaeb-4251-b7ad-a33eac478900",
+  "alert": "5f9c3e58-1c7f-4cfc-863b-d08b22574e42"
+}
+
+### Get all alert receivers
+GET http://127.0.0.1:8000/apiBloodlink/receiveAlertes/
+
+### Get alert receiver by ID
+GET http://127.0.0.1:8000/apiBloodlink/receiveAlertes/<id>
+
+### Update alert receiver (PUT)
+PUT http://127.0.0.1:8000/apiBloodlink/receiveAlertes/<id>
+Content-Type: application/json
+
+{
+  "name": "Association Donneurs Yaoundé - MAJ",
+  "contact_email": "newalerts@donneurs-yaounde.example",
+  "phone": "+237650111111",
+  "preferred_channels": ["email"],
+  "subscribed_blood_groups": ["O+", "O-"]
+}
+
+### Partial update (PATCH)
+PATCH http://127.0.0.1:8000/apiBloodlink/alert_receivers/<id>
+Content-Type: application/json
+
+{
+  "preferred_channels": ["sms"]
+}
+
+### Delete alert receiver
+DELETE http://127.0.0.1:8000/apiBloodlink/alert_receivers/<id>
+
+
+#################################################################
+#                  BLOOD TRANSACTIONS                          #
+#################################################################
+
+### Create a blood transaction
+POST http://127.0.0.1:8000/apiBloodlink/postbloodTransactions/
+Content-Type: application/json
+
+{
+  "provider_id": "e352cdb1-5842-4c05
+  "provider_id": "e352cdb1-5842-4c05-9701-d0cfefb1a1b2",
+  "bank_id": "d3e15784-8abc-4fe9-bbc7-292539ead6f1"
+}
+
+### List all blood transactions (with filters)
+GET http://127.0.0.1:8000/apiBloodlink/blood_transactions/?transaction_type=transfer&from_bank=eeeef11c-e628-4643-b175-ce4d69787407
+
+### Get a blood transaction by ID
+GET http://127.0.0.1:8000/apiBloodlink/blood_transactions/<id>
+
+### Update a blood transaction (PUT)
+PUT http://127.0.0.1:8000/apiBloodlink/blood_transactions/<id>
+Content-Type: application/json
+
+{
+  "transaction_type": "transfusion",
+  "blood_bag": "BB-2025-0001",
+  "from_bank": "eeeef11c-e628-4643-b175-ce4d69787407",
+  "to_bank": null,
+  "performed_by": 3,
+  "units": 1,
+  "date": "2025-10-23",
+  "notes": "Transfusion patient X"
+}
+
+### Partial update a blood transaction (PATCH)
+PATCH http://127.0.0.1:8000/apiBloodlink/blood_transactions/<id>
+Content-Type: application/json
+
+{
+  "notes": "Confirmation: transfusion réussie",
+  "units": 1
+}
+
+### Delete a blood transaction
+DELETE http://127.0.0.1:8000/apiBloodlink/blood_transactions/<id>
+
+
+#################################################################
+#                  EXAMPLES / ADVANCED USAGE                  #
+#################################################################
+
+### Get all available blood bags in a bank
+GET http://127.0.0.1:8000/apiBloodlink/blood_bags/?bank=eeeef11c-e628-4643-b175-ce4d69787407&status=available
+
+### Search alert receivers by preferred channel
+GET http://127.0.0.1:8000/apiBloodlink/alert_receivers/?channel=sms
+
+### Filter transactions by period
+GET http://127.0.0.1:8000/apiBloodlink/blood_transactions/?start_date=2025-10-01&end_date=2025-10-31
