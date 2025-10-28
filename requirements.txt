@@ -1,29 +1,27 @@
-requests# Core Django framework
+# Core Django framework
 Django>=4.2,<5.0
 
-# WSGI HTTP server for production (obligatoire pour Render)
+# WSGI HTTP server for production
 gunicorn
 
-# Gestion des fichiers statiques en production
+# Gestion des fichiers statiques
 whitenoise
 
-# Pour connecter Django à une base PostgreSQL Render
+# Connecteur PostgreSQL
 psycopg2-binary
 
-# Gestion automatique des URLs de base de données (DATABASE_URL)
+# Gestion de DATABASE_URL
 dj-database-url
 
-# Chargement des variables d'environnement (.env)
+# Variables d'environnement
 python-dotenv
-
-# Sécurité et utils divers
 django-environ
 
-# REST API (si ton projet utilise Django REST Framework)
+# Django REST Framework (si ton projet l'utilise)
 djangorestframework
 
-# CORS (si tu communiques avec un frontend React, Vue, etc.)
+# CORS pour communication avec un frontend
 django-cors-headers
 
-# Optionnel — pour les migrations automatiques sur Render
+# (Optionnel) outils supplémentaires
 django-extensions
