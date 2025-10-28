@@ -3,19 +3,20 @@ import uuid
 from .provider_models import Provider
 from .blood_bag_models import BloodBag
 from django.contrib.auth.hashers import make_password
+from ..models.user_models import User
 
 
 class BloodBank(models.Model):
     """ Banque de sang """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=127)
-    email = models.EmailField(max_length=127, unique=True)
     
     password = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     # Relation avec la poche de sang
     blood_bags = models.ManyToManyField('BloodBag', through='BloodTransaction', related_name='banks' )
     
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='bloodbank_profile')
     
     def save(self, *args, **kwargs):
         # Hachage automatique du mot de passe avant enregistrement

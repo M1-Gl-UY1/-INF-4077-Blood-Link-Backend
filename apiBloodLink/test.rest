@@ -62,7 +62,7 @@ Content-Type: application/json
 }
 
 ### Delete a blood bank by ID
-DELETE http://127.0.0.1:8000/apiBloodlink/bloodbanks/<id>
+DELETE http://127.0.0.1:8000/8870182c-e697-47ba-aaea-18817df2a4dc
 
 
 #################################################################

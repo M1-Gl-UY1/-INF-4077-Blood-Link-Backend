@@ -1,10 +1,13 @@
+import email
 from django.shortcuts import render
 from rest_framework import generics
 from .models.doctor_models import *
 from .serializers.doctor_serializers import *
+from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed
 
 from .models.blood_bank_models import *
-from .serializers.blood_bank_serializers import *
+from .serializers.blood_bank_serializers import * # type: ignore
 
 from .models.blood_bag_models import BloodBag
 from .serializers.blood_bag_serializers import BloodBagSerializer
@@ -18,6 +21,16 @@ from .serializers.provider_serializers import ProviderSerializer
 
 from .models.alertReceive_models import AlerteReceive
 from .serializers.alertReceive_serializers import AlertReceiveSerializers
+
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from .serializers.user_serializers import UserSerializer
+from .serializers.LoginSerializer import LoginSerializer # type: ignore
+
+from .models.user_models import User
+
+import jwt, datetime
 
 # Create your views here.
 # views for doctor
@@ -113,3 +126,66 @@ class BloodRequestRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPI
     queryset = BloodRequest.objects.all()
     serializer_class = BloodRequestSerializer
     lookup_field = "id"
+
+
+# ajout des vue login et register dans views.py
+class RegisterAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+
+class LoginAPIView(APIView):
+    def post(self, request):
+        # serializer = LoginSerializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+        # # Appel de create() pour générer le token
+        # data = serializer.create(serializer.validated_data)
+        # return Response(data, status=status.HTTP_200_OK)
+        email = request.data['email']
+        password = request.data['password']
+        
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            raise AuthenticationFailed('User not found')
+        
+        if not user.check_password(password):
+            raise AuthenticationFailed('Incorrect password')
+        
+        payload = {
+            'id': str(user.id),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'iat': datetime.datetime.utcnow()
+        }
+        
+        token = jwt.encode(payload, 'secret', algorithm='HS256')
+        
+        response = Response()
+        response.set_cookie(key='jwt', value=token, httponly=True)
+        response.data = {'jwt': token}
+        
+        return response
+                     
+                
+class UserViews(APIView):
+    def get(self, request):
+        token = request.COOKIES.get('jwt')
+        
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated!')
+        
+        user = User.objects.filter(id=payload['id']).first()
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+
+class Logout(APIView):
+    def post(self, request):
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {
+            'message': 'success'
+        }
+        return response

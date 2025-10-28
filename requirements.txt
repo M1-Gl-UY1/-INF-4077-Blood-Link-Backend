@@ -25,3 +25,9 @@ django-cors-headers
 
 # (Optionnel) outils supplémentaires
 django-extensions
+
+# Installeation du client mysql
+sudo apt install mysql-client -y
+#installation de JWT pour les token
+# JWT pour les tokens
+PyJWT>=2.0.0

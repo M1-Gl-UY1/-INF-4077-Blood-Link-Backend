@@ -1,8 +1,10 @@
 from django.db import models
 import uuid
 from .blood_bank_models import BloodBank
+from .user_models import User
 
 from django.contrib.auth.hashers import make_password
+from  django.contrib.auth.models  import AbstractUser
 
 GRADE_CHOICES = [
     ('INT', 'Interne'),
@@ -27,15 +29,16 @@ class Doctor(models.Model):
     name = models.CharField(max_length=100)
     grade = models.CharField(max_length=4, choices=GRADE_CHOICES, default='INT')
     speciality = models.CharField(max_length=2, choices=SPECIALITY_CHOICES, default='GP')
-    password = models.CharField(max_length=255)
+    # password = models.CharField(max_length=255)
     
-    blood_bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='linked')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor_profile')
+    blood_bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='linked', null=True, blank=True)
 
-    def save(self, *args, **kwargs):
-        # Hachage automatique du mot de passe avant enregistrement
-        if not self.password.startswith('pbkdf2_'):
-            self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Hachage automatique du mot de passe avant enregistrement
+    #     if not self.password.startswith('pbkdf2_'):
+    #         self.password = make_password(self.password)
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Dr. {self.name} ({self.grade} - {self.speciality})"

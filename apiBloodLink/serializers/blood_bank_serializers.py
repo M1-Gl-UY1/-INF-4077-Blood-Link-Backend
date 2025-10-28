@@ -1,11 +1,12 @@
+from re import U
 from rest_framework import serializers
 from apiBloodLink.models import BloodBank, BloodTransaction
-
+from ..serializers.user_serializers import UserSerializer
 
 class BloodTransactionSerializer(serializers.ModelSerializer):
     provider_name = serializers.CharField(source='provider.name', read_only=True)
     bank_name = serializers.CharField(source='bank.name', read_only=True)
-
+    
     class Meta:
         model = BloodTransaction
         fields = '__all__'
@@ -16,8 +17,9 @@ class BloodTransactionSerializer(serializers.ModelSerializer):
 class BloodBankSerializer(serializers.ModelSerializer):
     # Inclure toutes les transactions liées à cette banque
     transactions = BloodTransactionSerializer(source='bloodtransaction_set', many=True, read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = BloodBank
-        fields = ['id', 'name', 'email', 'transactions']
+        fields = '__all__'
         read_only_fields = ["id"]

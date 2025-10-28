@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.hashers import make_password
-
+from ..models.user_models import User
 
 class Provider(models.Model):
     
@@ -20,16 +20,18 @@ class Provider(models.Model):
     blood_group = models.CharField(max_length=1)
     rhesus = models.CharField(max_length=1)
     last_give = models.DateField(null=True, blank=True)
-    password = models.CharField(max_length=255)
+    # password = models.CharField(max_length=255)
     historique_medical = models.FileField(upload_to='medical_histories/', null=True, blank=True)
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='provider_profile')
     
     def __str__(self):
         return f"{self.name} ({self.blood_group}{self.rhesus})"
     
-    def save(self, *args, **kwargs):
-        # Hachage automatique du mot de passe avant enregistrement
-        if not self.password.startswith('pbkdf2_'):
-            self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Hachage automatique du mot de passe avant enregistrement
+    #     if not self.password.startswith('pbkdf2_'):
+    #         self.password = make_password(self.password)
+    #     super().save(*args, **kwargs)
 
    

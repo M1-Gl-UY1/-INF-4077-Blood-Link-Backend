@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+
 # ve service
 from .servicesViews.ValidateBloodRequestAPIView import ValidateBloodRequestAPIView
 from .servicesViews.reply_views import ReplyCreateAPIView
@@ -46,4 +47,14 @@ urlpatterns = [
     
     path('requests/<uuid:request_id>/validate/', ValidateBloodRequestAPIView.as_view(), name='validate-blood-request'),
     path('alerts/<uuid:alert_id>/reply/', ReplyCreateAPIView.as_view(), name='reply-alert'),
+    
+    
+    path('registers/', views.RegisterAPIView.as_view(), name='register'),
+    path('logins/', views.LoginAPIView.as_view(), name='login'),
+    path('users/', views.UserViews.as_view(), name='user'),
+    path('logout/', views.Logout.as_view(), name='logout'),
+    
+    
+    
+    
 ]
