@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apiBloodLink.apps.ApibloodlinkConfig',
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
