@@ -17,7 +17,7 @@ dj-database-url
 python-dotenv
 django-environ
 
-# Django REST Framework (si ton projet l'utilise)
+# Django REST Framework
 djangorestframework
 
 # CORS pour communication avec un frontend
@@ -26,8 +26,5 @@ django-cors-headers
 # (Optionnel) outils supplémentaires
 django-extensions
 
-# Installeation du client mysql
-sudo apt install mysql-client -y
-#installation de JWT pour les token
 # JWT pour les tokens
 PyJWT>=2.0.0
