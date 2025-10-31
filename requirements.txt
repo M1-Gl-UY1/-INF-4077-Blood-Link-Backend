@@ -28,3 +28,4 @@ django-extensions
 
 # JWT pour les tokens
 PyJWT>=2.0.0
+drf-yasg
