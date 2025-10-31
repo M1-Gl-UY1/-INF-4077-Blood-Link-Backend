@@ -32,8 +32,8 @@ class Alert(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     created_date = models.DateField(auto_now_add=True)
     Resolved_date = models.DateField(null=True, blank=True)
-    blood_groupe = models.CharField(choices=BLOOD_GROUP_CHOICES)
-    rhesus = models.CharField(choices=RHESUS_CHOICES)
+    blood_groupe = models.CharField(choices=BLOOD_GROUP_CHOICES, max_length=3)
+    rhesus = models.CharField(choices=RHESUS_CHOICES, max_length=3)
     
     # liaison avec la banque qui emmet une alerte
     bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name = 'emitted_alerts')

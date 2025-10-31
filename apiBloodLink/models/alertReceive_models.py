@@ -15,7 +15,9 @@ class AlerteReceive(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(choices= STATUS_CHOICES)
+    status = models.CharField(choices= STATUS_CHOICES,  max_length=20, default='PENDING')
+     
+     # liaison avec le provider qui recoit une alerte
     
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE, related_name='alerts', null=True, blank=True)
     alert = models.ForeignKey(Alert, on_delete=models.CASCADE, related_name='alerts')

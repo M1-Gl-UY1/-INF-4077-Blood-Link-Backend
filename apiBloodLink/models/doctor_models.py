@@ -71,8 +71,8 @@ class BloodRequest(models.Model):
     docteur = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='blood_requests')
     bank = models.ForeignKey(BloodBank, on_delete=models.CASCADE, related_name='blood_requests', null=True, blank=True)
     
-    blood_group = models.CharField(choices=BLOOD_GROUP_CHOICES)
-    rhesus = models.CharField(choices=RHESUS_CHOICES)
+    blood_group = models.CharField(choices=BLOOD_GROUP_CHOICES, max_length=3)
+    rhesus = models.CharField(choices=RHESUS_CHOICES, max_length=3)
     
     quantity = models.PositiveIntegerField()
     status = models.CharField(max_length=8, choices=BloodRequest_status, default='pending')
