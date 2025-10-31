@@ -264,7 +264,7 @@ GET http://127.0.0.1:8000/apiBloodlink/receiveAlertes/
 
 ### Get alert receiver by ID
 GET http://127.0.0.1:8000/apiBloodlink/receiveAlertes/<id>
-
+bloodRequests
 ### Update alert receiver (PUT)
 PUT http://127.0.0.1:8000/apiBloodlink/receiveAlertes/<id>
 Content-Type: application/json
@@ -298,7 +298,6 @@ POST http://127.0.0.1:8000/apiBloodlink/postbloodTransactions/
 Content-Type: application/json
 
 {
-  "provider_id": "e352cdb1-5842-4c05
   "provider_id": "e352cdb1-5842-4c05-9701-d0cfefb1a1b2",
   "bank_id": "d3e15784-8abc-4fe9-bbc7-292539ead6f1"
 }

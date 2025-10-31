@@ -12,16 +12,7 @@ class BloodRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BloodRequest
-        fields = [
-            'id',
-            'docteur', 'doctor_name',
-            'bank', 'bank_name',
-            'date_request',
-            'blood_group',
-            'rhesus',
-            'quantity',
-            'status'
-        ]
+        fields = "__all__"
         read_only_fields = ["id", "date_request"]
 
 
