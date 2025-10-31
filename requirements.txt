@@ -28,4 +28,5 @@ django-extensions
 
 # JWT pour les tokens
 PyJWT>=2.0.0
+djangorestframework-simplejwt
 drf-yasg
