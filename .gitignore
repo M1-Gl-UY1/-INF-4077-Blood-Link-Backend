@@ -1,1 +1,29 @@
+# Environnement Python
+venv/
+env/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+
+# Django-specific
+*.log
+db.sqlite3
+media/
+
+# Configuration et secrets
+.env
+*.env
+
+# IDE / éditeurs
+.vscode/
+.idea/
+*.swp
+
+# Fichiers système
+.DS_Store
+Thumbs.db
 env/
