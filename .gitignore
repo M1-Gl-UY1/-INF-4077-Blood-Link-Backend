@@ -27,3 +27,15 @@ media/
 .idea/
 *.swp
 .claude
+
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.yaml
+*.env
+
+# Docker
+.dockerignore
+
+# Fichiers macOS
+.DS_Store

@@ -21,12 +21,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pg6%&k+=vg8-7#a$kwu1^da7$bl!7ftq%m9s-jipb2f9mkzzh+'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-pg6%&k+=vg8-7#a$kwu1^da7$bl!7ftq%m9s-jipb2f9mkzzh+'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['inf-4077-blood-link-backend.onrender.com', '127.0.0.1', 'localhost']
+# Configuration des hôtes autorisés
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'inf-4077-blood-link-backend.onrender.com,127.0.0.1,localhost'
+).split(',')
+
+# Ajouter automatiquement les domaines Cloud Run
+if 'CLOUD_RUN_SERVICE_URL' in os.environ:
+    cloud_run_url = os.environ.get('CLOUD_RUN_SERVICE_URL')
+    if cloud_run_url:
+        from urllib.parse import urlparse
+        parsed_url = urlparse(cloud_run_url)
+        if parsed_url.hostname not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(parsed_url.hostname)
 
 
 # Application definition
@@ -80,12 +96,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Configuration de la base de données
+# Utilise Cloud SQL PostgreSQL si DATABASE_URL est défini, sinon SQLite
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
